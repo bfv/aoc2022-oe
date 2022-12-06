@@ -1,8 +1,6 @@
 var longchar signal.
 var int a, b, pos.
 
-copy-lob file "day06/input.txt" to signal.
-
 function getUnique returns char (s as longchar):
   var int i.
   var char c, u.
@@ -14,10 +12,10 @@ function getUnique returns char (s as longchar):
 end function.
 
 function allUnique returns logical (pos as int, size as int):
-  if (pos < size) then return false.
-  return length(getUnique(substring(signal, pos - size + 1, size))) = size.
+  return (pos >= size) and length(getUnique(substring(signal, pos - size + 1, size))) = size.
 end function.
 
+copy-lob file "day06/input.txt" to signal.
 do pos = 4 to length(signal):
   if (a = 0 and allUnique(pos, 4)) then a = pos.
   if (b = 0 and allUnique(pos, 14)) then b = pos.
